@@ -1,1 +1,2 @@
-s
+link: https://xe1.xpressengine.com/index.php?mid=download&package_id=18325662&detail=release
+version: ver 1.11.6

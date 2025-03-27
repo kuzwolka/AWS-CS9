@@ -1,0 +1,418 @@
+    1  ll
+    2  ll -a
+    3  ll
+    4  ls
+    5  ll
+    6  clear
+    7  sudo su
+    8  clear
+    9  sudo -i
+   10  ssh
+   11  ll
+   12  ip addr
+   13  netplan apply
+   14  sudo netplan apply
+   15  netplan apply
+   16  ip addr
+   17  sudo systemctl set-default multi-user.target
+   18  ping 8.8.8.8
+   19  systemctl start ssh
+   20  sudo init 6
+   21  uname -nr
+   22  for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+   23  clear
+   24  touch dockerinstall.sh ; chmod +x dockerinstall.sh
+   25  ip addr
+   26  sudo netplan apply
+   27  ip addr
+   28  docker container ls
+   29  docker image ls
+   30  docker image rm hello-world
+   31  docker stop hello-world
+   32  docker container run -d --name myweb1 -p 8001:80 --restart always nginx
+   33  docker image ls
+   34  docker container run -d --name myweb2 -p 8002:80 --restart always nginx
+   35  hostname -I
+   36  ll
+   37  history
+   38  docker search
+   39  docker search mariadb
+   40  docker search elasticsearch
+   41  docker search steam
+   42  docker kafka
+   43  docker search kafka
+   44  docker dante
+   45  docker search dante
+   46  docker container ls
+   47  docker container top 4cb44a08f0d5
+   48  docker container top 4cb
+   49  docker container top myweb2
+   50  docker container logs f1
+   51  docker container logs 4cb
+   52  docker container inspect myweb2
+   53  ip a
+   54  docker network ls
+   55  docker container ls
+   56  docker container rm nginx
+   57  docker container rm 4cb
+   58  docker container stop 4cb
+   59  docker container ls
+   60  docker container rm 4cb
+   61  docker container ls
+   62  docker container rm db8
+   63  docker ps
+   64  docker container rm --force myweb1
+   65  docker container ls -aq
+   66  docker container ls -a
+   67  docker container rm --force $(docker container ls -aq)
+   68  docker image ls -a
+   69  docker image rm --force $(docker image ls -aq)
+   70  touch rmctn rmimg
+   71  chmod +x rmctn rming
+   72  chmod +x rmimg
+   73  ll
+   74  sudo cp rmimg rmctn /usr/in
+   75  sudo cp rmimg rmctn /usr/bin
+   76  rmctn
+   77  rmimg
+   78  docker search mariadb
+   79  docker container run -d --name mydb1 -p 33061:3306 --restart always --env MARIADB_ROOT_PASSWORD=test1234 mariadb:10.5
+   80  docker login -u kuzwolka
+   81  docker container run -d --name mydb1 -p 33061:3306 --restart always -e MARIADB_ROOT_PASSWORD=test1234 mariadb:10.5
+   82  docker container ls
+   83  docker container ls -a
+   84  docker container ls -q
+   85  docker container ls -a
+   86  docker container run -d --name mydb2 -p 33062:3306 --restart always -e MARIADB_ROOT_PASSWORD=test1234 -v /home/user1/db:/var/lib/mysql mariadb:10.5
+   87  ls
+   88  ll /var/lib
+   89  ll
+   90  ls db2
+   91  docker container run -d --name mydb3 -p 33063:3306 --restart always -e MARIADB_ROOT_PASSWORD=test1234 -v dbvol3:/var/lib/mysql mariadb:10.5
+   92  ls db
+   93  ls
+   94  docker volume ls
+   95  docker volume inspect dbvol3
+   96  sudo ls /var/lib/docker/volumes/dbvol3/_data
+   97  docker container run -it --name rocky1 --hostname rcky1 --restart always rockylinux:8 /bin/bash
+   98  docker container ls
+   99  docker container attach rocky1
+  100  docker container exec rocky1 'ls'
+  101  docker container run -d -p 8002:80 --restart always nginx
+  102  mkdir testweb
+  103  echo "hello" > testweb/index.html
+  104  docker container ls
+  105  docker container cp testweb/index.html ecstatic_pascal:/usr/share/nginx/html
+  106  rmctn
+  107  db container creation
+  108  docker container run -d --name wpdb docker container run -d --name wpdb -v wpvol:/var/lib/mysql --restart always -e MYSQL_ROOT_PASSWORD=test123 -e MYSQL_DATABASE=wordpress mysql:5.7
+  109  docker container run -d --name wpdb -v wpvol:/var/lib/mysql --restart always -e MYSQL_ROOT_PASSWORD=test123 -e MYSQL_DATABASE=wordpress mysql:5.7
+  110  rmcnt
+  111  rmcmt
+  112  rmcnt
+  113  rmctn
+  114  docker container run -d --name wpdb -v wpvol:/var/lib/mysql --restart always -e MYSQL_ROOT_PASSWORD=test123 -e MYSQL_DATABASE=wordpress mysql:5.7
+  115  docker container run -d --name wp --restart always -p 8888:80 --link wpdb:mysqldb -v webvol:/var/www/html -e WORDPRESS_DB_HOST=wpdb -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=test123 -e WORDPRESS_DB_NAME=wordpress wordpress
+  116  docker volume ls
+  117  docker container exec wp 'ls'
+  118  docker container exec wp 'cat /etc/hosts'
+  119  docker container exec wp 'vi /etc/hosts'
+  120  docker container exec wp 'vim /etc/hosts'
+  121  docker container exec wp 'ls /etc/hosts'
+  122  docker container exec wp 'ls /etc'
+  123  docker container exec wp 'ls'
+  124  docker container exec wp 'ls ..'
+  125  docker container exec wp 'ls /'
+  126  docker container exec wp 'exit'
+  127  docker container exec wp 'init'
+  128  docker container exec wp 'init 6'
+  129  docker container exec wp 'cat xmlrpc.php'
+  130  docker container exec wp 'ls xmlrpc.php'
+  131  docker container exec wp 'ls \'
+  132  docker container exec wp ls
+  133  docker container exec wp ls /
+  134  docker container exec wp ls /etc/hosts
+  135  docker container exec wp cat /etc/hosts
+  136  docker search kibana
+  137  docker search deepseek
+  138  docker run -d --name registry -p 5000:5000 --restart always registry:2
+  139  docker run -d -p 8080:8080 --restart always --name registry-web --link registry -e REGISTRY_URL=http://registry:5000/v2 -e REGISTRY_NAME=10.10.222.10:5000 hyper/docker-registry-web
+  140  rmcnt
+  141  rmctn
+  142           docker run -d --name registry -p 5000:5000 --restart always registry:2
+  143  
+  144           docker run -d -p 8080:8080 --restart always --name registry-web --link registry -e REGISTRY_URL=http://registry:5000/v2 -e REGISTRY_NAME=211.183.3.201:5000 hyper/docker-registry-web
+  145  rmctn
+  146  ip a
+  147  docker run -d --name registry -p 5000:5000 --restart always registry:2
+  148  docker run -d -p 8080:8080 --restart always --name registry-web --link registry -e REGISTRY_URL=http://registry:5000/v2 -e REGISTRY_NAME=211.183.3.201:5000 hyper/docker-registry-web
+  149  ls -al
+  150  ls -al | grep docker
+  151  cd .docker
+  152  ll
+  153  cat config.json
+  154  echo hello
+  155  echo "hello" | base64
+  156  echo "aGVsbG8K" | base64
+  157  echo "aGVsbG8K" | base64 -d
+  158  echo a3V6d29sa2E6Zm9jbXV2LTlEb3p6YS13aWhyb3I= | base64 -d
+  159  clear
+  160  docker image ls
+  161  docker tag nginx:latest 211.183.3.201:5000/mynginx:blue
+  162  docker push
+  163  docker push 211.183.3.201:5000/mynginx:blue
+  164  docker push http://211.183.3.201:5000/mynginx:blue
+  165  vi /etc/docker/daemon.json
+  166  sudo vi /etc/docker/daemon.json
+  167  sudo systemctl restart docker
+  168  docker push 211.183.3.201:5000/mynginx:blue
+  169  sudo systemctl restart dockerd
+  170  sudo systemctl restart docker
+  171  sudo vi /etc/docker/daemon.json
+  172  sudo vi /etc/docker/daemon.json 
+  173  sudo systemctl restart docker
+  174  docker push 211.183.3.201:5000/mynginx:blue
+  175  sudo systemctl enable docker
+  176  init 0
+  177  sudo init 0
+  178  ./dockerinstall.sh 
+  179  apt-cache madison docker-ce | awk '{ print $3 }'
+  180  ./dockerinstall.sh 
+  181  sudo docker run hello-world
+  182  sudo docker list
+  183  docker --help
+  184  docker --version
+  185  docker container
+  186  docker container --help
+  187  sudo docker rm hello-world
+  188  sudo docker list
+  189  sudo docker run hello-world
+  190  sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  191  sudo chmod +x /usr/local/bin/docker-compose 
+  192  docker-compose version
+  193  docker version
+  194  sudo docker version
+  195  sudo docker container ls
+  196  which docker
+  197  ls -l /usr/bin/docker
+  198  sudo chown user1.user1 /usr/bin/docker
+  199  ls -l /usr/bin/docker
+  200  docker ls
+  201  docker container ls
+  202  sudo chown root.root /usr/bin/docker
+  203  sudo cat /etc/group
+  204  sudo vi /etc/group
+  205  sudo source /etc/group
+  206  source /etc/group
+  207  docker container ls
+  208  sudo su
+  209  l;
+  210  ll
+  211  docker container ls
+  212  rmctn
+  213  sudo vi /etc/docker/daemon.json
+  214  sudo systemctl restart docker
+  215  sudo systemctl status docker
+  216  sudo systemctl restart docker
+  217  sudo vi /etc/docker/daemon.json
+  218  clear
+  219  docker image ls
+  220  nginx
+  221  docker tag nginx:latest 13.124.183.113:5000/khk:1.0
+  222  docker image ls
+  223  docker push 1.0
+  224  docker push nginx:latest 13.124.183.113:5000/khk:1.0
+  225  docker push 13.124.183.113:5000/khk:1.0
+  226  docker image ls
+  227  docker search 13.124.183.113:5000
+  228  docker search 13.124.183.113:5000 1.0
+  229  docker image rm -f 13.124.183.113:5000/khk:1.0
+  230  docker image ls
+  231  docker pull 13.124.183.113:5000/khk:1.0
+  232  image ls
+  233  docker image ls
+  234  docker container run -d --name nginx1
+  235  rmctn
+  236  docker image inspect
+  237  docker image inspect nginx:latest
+  238  docker image inspect nginx:latest | grep config
+  239  docker image inspect nginx:latest
+  240  docker container run -d --name nginx1 -p 8001:80 -v /home/usr1/nginx1:/usr/share/nginx/html --restart always nginx:latest
+  241  ll
+  242  sudo echo "hello" > /home/user1/nginx1/index.html
+  243  echo "hello" | sudo tee /home/user1/nginx1/index.html
+  244  echo "hello" | sudo tee /home/usr1/nginx1/index.html
+  245  rmctn
+  246  docker container run -d --name nginx1 -p 8001:80 -v /home/user1/nginx1:/usr/share/nginx/html --restart always nginx:latest
+  247  echo "hello" | sudo tee /home/user1/nginx1/index.html
+  248  echo "wat test" | sudo tee /home/user1/nginx1/index.html
+  249  docker container run -d --name httpd1 -p 8002:80 -v /home/user1/httpd1:/var/www/html --restart always httpd:latest
+  250  docker container run -d --name httpd1 -p 8002:80 -v /home/user1/httpd1:/usr/local/apache2/htdocs --restart always httpd:latest
+  251  echo "hell" | sudo tee /home/user1/httpd1/index.html
+  252  touch blog.html | vi blog.html
+  253  ll
+  254  clear
+  255  ll
+  256  cat blog.html
+  257  docker container cp blog.html httpd1:/usr/local/apache2/htdocs
+  258  docker network ls
+  259  docker network create -d bridge --subnet 10.10.10.0/24 --ip-range=10.10.10.0/24 net-test 
+  260  docker network ls
+  261  docker network inspect net-test
+  262  docker network connect --ip=10.10.10.10 net-test httpd1
+  263  doker container inspect httpd1
+  264  docker container inspect httpd1
+  265  ip a
+  266  ping 10.10.10.10
+  267  touch test.json
+  268  vi test.json
+  269  cat test.json
+  270  sudo apt install -y jq
+  271  cat test.json | jq '.'
+  272  cat test.json | jq '.["name"]'
+  273  cat test.json | jq -r '.["name"]'
+  274  cat test.json | jq '.name'
+  275  cat test.json | jq '.address.city'
+  276  docker container inspect httpd1 | jq '.'
+  277  docker container inspect httpd1 | jq '.[]'
+  278  docker container inspect httpd1 | jq '.[].NetworkSettings'
+  279  docker container inspect httpd1 | jq '.[].NetworkSettings.Networks.net-test'
+  280  docker container inspect httpd1 | jq '.[].NetworkSettings.Networks'
+  281  docker container inspect httpd1 | jq '.[].NetworkSettings.Networks."net-test"'
+  282  docker container inspect httpd1 | jq '.[].NetworkSettings.Networks."net-test".IPAMConfig'
+  283  docker container inspect httpd1 | jq '.[].NetworkSettings.Networks."net-test".IPAMConfig.IPv4Address'
+  284  cat test.json
+  285  docker image inspect httpd1
+  286  docker container inspect httpd1
+  287  docker container inspect httpd1 | jq .
+  288  docker container inspect nginx1 | jq .
+  289  print env
+  290  print ENV
+  291  print $
+  292  printenv
+  293  cd
+  294  mkdir myimg1 ; cd myimg1
+  295  touch index.html
+  296  docker build -t myimg:blue .
+  297  ll
+  298  docker image ls | grep blue
+  299  docker container run -d -p 8003:80 --restart always myimg:blue
+  300  cd ..
+  301  mkdir myimg2 ; cd myimg2
+  302  docker build -t myimg:manager .
+  303  ll
+  304  mkdir member
+  305  cd member/
+  306  touch Dockerfile
+  307  mdkir blog
+  308  mkdir blog
+  309  echo "BLOGPAGE" > blog/index.html
+  310  cat blog/index.html
+  311  tar web
+  312  tar cf web.tar blog/*
+  313  ll
+  314  mv web.tar blog/
+  315  mv blog/web.tar .
+  316  cat Dockerfile
+  317  vi Dockerfile
+  318  docker build -t myimg:blog .
+  319  docker container run -d -p 8004:80 --restart always myimg:blog
+  320  cd ..
+  321  cd membersport
+  322  tar cf web.tar sports/*
+  323  docker build -t myimg:sports .
+  324  docker container run -d -p 8005:80 --restart always myimg:sports
+  325  history
+  326  docker image ls
+  327  ll sport
+  328  ll sports
+  329  cat Dockerfile 
+  330  top
+  331  top -d 1
+  332  cd
+  333  clear
+  334  mkdir xeproj
+  335  ll
+  336  cd xeproj
+  337  docker build -t khk:xe
+  338  docker build -t khk:xe .
+  339  docker build -t khk:xe
+  340  docker build -t khk:xe .
+  341  docker build -t khk:xe ./Dockerfile
+  342  docker build -t khk:xe .
+  343  docker container run -d --name xepress1 -p 8008:80 --restart always khk:xe
+  344  docker container stop xepress1
+  345  docker container remove xepress1
+  346  docker ps -a
+  347  docker rm xepress1
+  348  docker ps -a
+  349  docker image ls
+  350  docker build -t khk:xe1 .
+  351  docker build -t khk:xe1 /home/user1/xeproj/Nockerfile
+  352  docker build -t khk:xe1 .
+  353  docker container run -d --name xepress2 -p 8008:80 --restart always khk:xe1
+  354  docker image rm khk:xe
+  355  docker build -t khk:xe .
+  356  docker image ls
+  357  docker build -t khk:xe2 .
+  358  docker container run -d --name xepress3 -p 8009:80 --restart always khk:xe2
+  359  docker container exec xepress3 'ls'
+  360  docker container exec xepress3 'ls /var/www/html'
+  361  docker container exec xepress3 ls /var/www/html
+  362  docker container exec xepress3 netstat -an
+  363  docker container exec xepress3 ls /var/www/
+  364  docker container exec xepress3 ls /var/www/html
+  365* docker container exec xepress cat /var/www/html/index.php
+  366* 
+  367  docker build -t khk:xe3 .
+  368  docker container ls
+  369  docker image ls
+  370  docker build -t khk:xe4 .
+  371  docker container run -d --name xepress4 -p 8010:80 --restart always khk:xe4
+  372  docker container exec xepress4 ls
+  373  docker container exec xepress4 ls /var/www/html
+  374  docker container ls
+  375  ls
+  376  cat xe/index.php 
+  377  rmctn
+  378  docker build -t khk:xe .
+  379  docker container run -d --name xepress -p 8008:80 --restart always khk:xe
+  380  docker container ls
+  381  rmctn
+  382  docker build -t khk:xe .
+  383  docker container run -d --name xepress -p 8008:80 --restart always khk:xe
+  384  docker build -t khk:xe .
+  385  rmctn
+  386  docker container run -d --name xepress -p 8008:80 --restart always khk:xe
+  387  docker tag khk:xe 13.124.183.113:5000/khk:xe
+  388  docker tag khk:xe 13.124.183.113:5000/khk:1.0
+  389  docker push 13.124.183.113:5000/khk:xe
+  390  docker container run -d --name xedb -p 33061:3306 --restart always --env MARIADB_ROOT_PASSWORD=test123 --env MYSQL_DATABASE=xe mysql:5.7
+  391  rmctn
+  392  docker container run -d --name xedb -p 33061:3306 --restart always --env MARIADB_ROOT_PASSWORD=test123 --env MYSQL_DATABASE=xe mysql:5.7
+  393  docker container run -d --name xepress --link xepress:xedb -p 8008:80 --restart always khk:xe
+  394  docker container run -d --name xepress -p 8008:80 --restart always khk:xe
+  395  docker container -run -d --link xedb:db
+  396  rmctn
+  397  docker container run -d --name xedb -p 33061:3306 --restart always --env MARIADB_ROOT_PASSWORD=test123 --env MYSQL_DATABASE=xe mariadb:10.5
+  398  docker container run -d --name xepress --link xedb:db -p 8008:80 --restart always khk:xe
+  399  docker container exec ls -a
+  400  docker container exec xepress ls -a
+  401  docker container exec xepress ls -s
+  402  docker container exec xepress chmod /var/www/html
+  403  docker container exec xepress chmod 707 /var/www/html
+  404  docker container exec
+  405  docker container inspect xedb
+  406  history
+  407  rmctn
+  408  docker build -t khk:xe .
+  409  docker container run -d --name xedb -p 33061:3306 --restart always --env MARIADB_ROOT_PASSWORD=test123 --env MYSQL_DATABASE=xe mariadb:10.5
+  410  docker container run -d --name xepress --link xedb:db -p 8008:80 --restart always khk:xe
+  411  rmctn
+  412  docker build -t khk:xe .
+  413  docker container run -d --name xedb -p 33061:3306 --restart always --env MARIADB_ROOT_PASSWORD=test123 --env MYSQL_DATABASE=xe mariadb:10.5
+  414  docker container run -d --name xepress --link xedb:db -p 8008:80 --restart always khk:xe
+  415  docker tag khk:xe 13.124.183.113:5000/khk:1.0
+  416  docker tag khk:xe 13.124.183.113:5000/khk:xe
+  417  docker push 13.124.183.113:5000/khk:xe
+  418  history

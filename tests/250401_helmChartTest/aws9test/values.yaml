@@ -1,0 +1,8 @@
+apps:
+- blog
+- shop
+- news
+
+image: nginx
+
+namespace: aws9helm

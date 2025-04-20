@@ -1,0 +1,25 @@
+---
+{{- range $app := .Values.apps }}
+{{- with $ -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: {{ $app }}-deploy
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ $app }}
+  template:
+    metadata:
+      labels:
+        app: {{ $app }}
+    spec:
+      containers:
+      - name: {{ $app }}-ctn
+        image: kuzwolka/aws9:blue
+        ports:
+          - containerPort: 80
+{{- end }}
+---
+{{- end }}

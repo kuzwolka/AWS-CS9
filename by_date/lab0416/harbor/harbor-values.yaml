@@ -1,0 +1,24 @@
+expose:
+  type:	ingress
+  ingress:
+    className:	nginx
+    hosts:
+      core:	harbor.example.com
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect:	"true"
+    tls:
+      enabled:	true
+      secretName:	harbor-tls
+externalURL:	https://harbor.example.com
+persistence:
+  enabled:	false		#	사용하고	싶지	않다면	false	로	변경하고	아래	PVC	는	지운다
+
+harborAdminPassword:	"TEst1234!"
+database:
+  type: internal
+redis:
+  type:	internal
+#	SSL	설정	(자체	서명	인증서	사용	시)
+tls:
+  enabled: true
+  existingSecret: harbor-tls

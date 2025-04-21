@@ -1,0 +1,28 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aws9-portal
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: www.aws9.pri
+    http:
+      paths:
+      - path: "/shop" #www.aws9.pri/shop이 풀 경로
+        pathType: Prefix
+        backend:
+          service:
+            name: aws9-svc-shop
+            port:
+              number: 80
+      - path: "/blog" #www.aws9.pri/blog이 풀 경로
+        pathType: Prefix
+        backend:
+          service:
+            name: aws9-svc-blog
+            port:
+              number: 80

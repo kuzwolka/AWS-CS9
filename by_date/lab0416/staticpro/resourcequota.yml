@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata: 
+  name: sample-quota
+spec:
+  hard:
+    requests.storage: 10Gi
+    count/persistentvolumeclaims: "4"

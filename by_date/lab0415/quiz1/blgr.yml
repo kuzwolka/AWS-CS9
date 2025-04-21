@@ -1,0 +1,89 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: blgr
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-deploy
+  namespace: blgr
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blue
+  template:   #pod
+    metadata:
+      labels:
+        app: blue
+    spec:
+      containers:
+      - name: blue-ctn
+        image: kuzwolka/aws9:blue
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "32M"
+            cpu: "0.25"
+          limits:
+            memory: "64M"
+            cpu: "1"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green-deploy
+  namespace: blgr
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: green
+  template:   #pod
+    metadata:
+      labels:
+        app: green
+    spec:
+      containers:
+      - name: green-ctn
+        image: kuzwolka/aws9:green
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "32M"
+            cpu: "0.25"
+          limits:
+            memory: "64M"
+            cpu: "1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blgr-svc
+  namespace: blgr
+spec:
+  type: LoadBalancer
+  selector:
+    app: green
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: aws9-hpa
+  namespace: blgr
+spec:
+  maxReplicas: 30
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: green-deploy
+  targetCPUUtilizationPercentage: 40

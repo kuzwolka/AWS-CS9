@@ -5,7 +5,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: {{ $app }}-deploy
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
   selector:
     matchLabels:
@@ -17,14 +17,15 @@ spec:
     spec:
       containers:
       - name: {{ $app }}-ctn
-        image: kuzwolka/aws9:{{ $app }}
+        image: {{ .Values.repo }}:{{ $app }}
+        imagePullPolicy: Always
         ports:
           - containerPort: 80
         resources:
           requests:
-            cpu: "100m"
+            cpu: "{{ .Values.resources.cpuRequests }}"
           limits:
-            cpu: "200m"
+            cpu: "{{ .Values.resources.cpuLimits }}"
 {{- end }}
 ---
 {{- end }}

@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: aws9-portal
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   annotations: 
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -12,7 +12,14 @@ spec:
   - host: www.aws9.pri
     http:
       paths:
-      {{- range $app := .Values.apps }}
+        - path: "{{ .Values.ingress.ingress_main.prefix }}" #www.aws9.pri/shop이 풀 경로
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Values.ingress.ingress_main.name }}-svc
+              port:
+                number: 80
+      {{- range $app := .Values.ingress.ingress_apps }}
         - path: "/{{ $app }}" #www.aws9.pri/shop이 풀 경로
           pathType: Prefix
           backend:

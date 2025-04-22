@@ -1,0 +1,27 @@
+apps:
+- main
+- blog
+- shop
+- news
+
+ingress:
+  ingress_main:
+    prefix: /
+    name: main
+  ingress_apps:
+  - blog
+  - shop
+  - news
+
+repo: kuzwolka/aws9
+
+resources:
+  cpuRequests: 100m
+  cpuLimits: 300m
+
+kedaSettings:
+  minReplicaCount: 1
+  maxReplicaCount: 10
+  triggers:
+    cronDesiredReplicas: 3
+    cpuUtilization: 60

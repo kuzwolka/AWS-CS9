@@ -1,6 +1,0 @@
-apps:
-- blog
-- shop
-- news
-
-namespace: aws9helm

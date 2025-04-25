@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: www.test.pri    #host 대신 그냥 http 넣으면 IP로 접근
+    http: 
+      paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: web-svc
+              port:
+                number: 80

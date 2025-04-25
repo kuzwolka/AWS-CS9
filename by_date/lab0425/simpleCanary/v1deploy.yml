@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebv1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:  #pod의 label 골라내기 위한 selector
+      app: web    #어떤 label이 3개 있는지 셈(controller)
+      version: v1 #둘 다 가지고 있어야함
+  template:
+    metadata:
+      labels:
+        app: web
+        version: v1
+    spec:
+      containers:
+        - name: web
+          image: nginx
+          ports:
+          - containerPort: 80
+      imagePullSecrets:
+        - name: docker-pull-secret

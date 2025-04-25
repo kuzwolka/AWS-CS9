@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebv2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:  
+      app: web    
+      version: v2 
+  template:
+    metadata:
+      labels:
+        app: web
+        version: v2
+    spec:
+      containers:
+        - name: web
+          image: httpd
+          ports:
+          - containerPort: 80
+      imagePullSecrets:
+        - name: docker-pull-secret

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test1-cmap
+data:
+  OSNAME: ubuntu
+  NAME: gildong

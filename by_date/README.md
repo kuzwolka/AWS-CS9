@@ -23,3 +23,5 @@
 #### lab0425
 - Canary Deployment
 - Istio Playbook(virtual network yml file)
+    - from `istio-1.20.2/samples/bookinfo/networking`
+    

@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp2
+spec:
+  containers:
+  - name: myapp2
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: test2-cmap-vol
+      mountPath: /usr/share/nginx/html
+    - name: test1-cmap-vol
+      mountPath: /root/test2
+  volumes:
+  - name: test2-cmap-vol
+    configMap:
+      name: indexcm2
+  - name: test1-cmap-vol
+    configMap:
+      name: indexcm
+  imagePullSecrets:
+  - name: docker-pull-secret

@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dev2
+  namespace: aws9
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: dev2
+  namespace: aws9
+rules:
+- apiGroups: ["", "apps"]
+  resources: ["pods", "deployments"]
+  verbs: ["list", "get", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dev2
+  namespace: aws9
+roleRef:    # 어떤 role을
+  kind: Role
+  name: dev2
+  apiGroup: rbac.authorization.k8s.io
+subjects:   # 누구에게 부여할 것인가?
+- kind: ServiceAccount
+  name: dev2
+  namespace: aws9

@@ -1,8 +1,17 @@
+# key-pair Openstack registration
+resource "openstack_compute_keypair_v2" "keypair2" {
+  name = "testkey2"
+  public_key = file("/root/AWS-CS9/by_date/lab0515/terraform01/hello.pem.pub")
+
+}
+
+# start instance
 resource "openstack_compute_instance_v2" "basic" {
-  name              = "cirros1"
-  image_id          = "0e05e5d9-2ea3-4ef5-935e-90fdc6acfb06"
-  flavor_id         = "6"
-  security_groups   = ["cirrossg"]
+  name              = "ubuntu"
+  image_id          = "272911c7-88f2-42cb-b4d2-c1eeae3b7d4a"
+  flavor_id         = "2"
+  security_groups   = ["basicSG"]
+  key_pair          = openstack_compute_keypair_v2.keypair2.name
 
   network {
     name = "mynet"
@@ -11,6 +20,13 @@ resource "openstack_compute_instance_v2" "basic" {
   lifecycle {
     create_before_destroy = true
   }
+
+  user_data = <<-EOF
+            #!/bin/bash
+            touch test.txt
+            sudo apt update
+            sudo apt install -y nginx ssh
+            EOF
 }
 
 # 인스턴스 사설 주소 = 매핑 =  공인주소(floating IP)
@@ -32,4 +48,20 @@ resource "openstack_compute_floatingip_associate_v2" "fip_1" {
 # 다 되고 공인IP 주소 output되게
 output "public-IP" {
   value = openstack_networking_floatingip_v2.fip_1.address
+}
+
+
+resource "terraform_data" "apply2" {
+  connection {
+    type = "ssh"
+    user = "ubuntu"
+    private_key = file("/root/AWS-CS9/by_date/lab0515/terraform01/hello.pem")
+    host = openstack_networking_floatingip_v2.fip_1.address
+  }
+
+
+  provisioner "remote-exec" {
+    # 로컬에만 만들어 두면 자동으로 원격지에 복사>실행행
+    script = "/root/AWS-CS9/by_date/lab0515/terraform01/test.sh"
+  }
 }

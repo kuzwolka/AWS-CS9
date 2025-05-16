@@ -1,0 +1,7 @@
+# Configure the AWS Provider
+provider "aws" {
+  region = "ap-northeast-2"
+  access_key = "ASIAI5ES"
+  secret_key = "2hRscntGFk3u+"
+  token = "IQoJb3JpZ2luX2VjEQ8daLXireAjAUt3Ucs2TzgPxIyTYMZfTD4q38HgyPlwd3r+y+nptNXe2igBe0kn3LpVzBTbuE99Y+Hqbydrtxyu0rDGqrjVUNDMFNI3O0PLEsHlj7lVcQoyCucaGjtFvr9XNwDeoJUmAygLMb41qj2BFIIyVqGMQKOwzXZ320n7H31gyU49Y7Fru3BqkcoJImpL6vOjHcxq/EMqLplDyQ9J7nXLVQbMUsQfATRHK5ZDyF0gUi7NC/Kc/x7Z6CjAPFj0CLiawTAXc3FID+5GKq9GmFMz+AnKljDKHwttgj7fkZkZxHbkC+ca0U8ECQLvdYocmybGWxaMxmi/y6A+d9fxoPlaxM+1fR3XXd0MC+RvHQwe4BDIp1piwlZzC+yHJLLBr54sWb14Ef8Di1JagVpH0cn+1QhoqCl9jUOLv7JG6IwYj2iZd56Ts+w9w2/bQuOGyX+ZUv805oafFwzfGsOsQW04nQMNWHlsEGOqUBDjJKMT/ETEaHJGeOKkkSl2cdQq2+F7V1SGxcbue2GyRlQcHVDGjzo0URFmRcQwRq3hZtOkp12Gdow12Kv8XouX0CP4Rr1d7l978DkYuOlwlJR3n2t6wGwEDT7c6d2l+/aZcNWBtKx9ihw4JAscHe7tIDTlyGpB8eRVCb7ibOcrSKmG0ceX3X4JwaCAWQEf44UlfE5DXlX8Q95TgSC7V8bte9bN0k"
+}

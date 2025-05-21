@@ -26,6 +26,12 @@ variable "ec2type" {
   default = "t3.micro"
 }
 
+
+variable "s3" {
+  type = number
+  default = 4
+}
+
 variable "server_port" {
   description = "webserver port"
   type = number
@@ -35,7 +41,7 @@ variable "server_port" {
 variable "ec2" {
   description = "number of instances"
   type = number
-  default = 5
+  default = 3
 }
 
 variable "availability_zones" {

@@ -36,11 +36,12 @@ resource "aws_eip" "nat-eip" {
 }
 
 resource "aws_internet_gateway" "test" {
-    vpc_id = aws_vpc.test.id
-    tags = { Name = "${local.vpc_name}-igw" }
+  vpc_id = aws_vpc.test.id
+  tags = { Name = "${local.vpc_name}-igw" }
 }
 
 resource "aws_nat_gateway" "test" {
+  
   allocation_id = aws_eip.nat-eip.id
   subnet_id = aws_subnet.public_subnets[0].id
   tags = { Name = "${local.vpc_name}-ngw" }

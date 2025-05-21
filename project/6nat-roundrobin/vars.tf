@@ -15,6 +15,7 @@ variable "id" {
   default = "default-user"
 }
 
+
 variable "user_git" {
   description = "유저의 github repo 링크"
   type = string
@@ -35,7 +36,7 @@ variable "server_port" {
 variable "ec2" {
   description = "number of instances"
   type = number
-  default = 5
+  default = 3
 }
 
 variable "availability_zones" {

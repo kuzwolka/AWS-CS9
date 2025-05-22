@@ -21,7 +21,7 @@ variable "project_link" {
   default = "https://github.com/kuzwolka/awswebtest.git"
 }
 
-variable "ec2type" {
+variable "instance_type" {
   type = string
   default = "t3.micro"
 }
@@ -42,9 +42,9 @@ variable "session_token" {
   default = "-"
 }
 
-variable "s3" {
+variable "bucket_count" {
   type = number
-  default = 4
+  default = 3
 }
 
 variable "server_port" {
@@ -53,7 +53,7 @@ variable "server_port" {
   default = 80
 }
 
-variable "ec2" {
+variable "instance_count" {
   description = "number of instances"
   type = number
   default = 3
@@ -77,7 +77,7 @@ variable "availability_zones" {
   }
 }
 
-#------------- RDS
+#------------- RDS Variable ---------------------------------
 variable "rds" {
   description = "A map of key-value pairs"
   type        = map(string)
@@ -117,4 +117,27 @@ variable "db_count" {
 variable "db_identifier" {
   type = string
   default = "default-db"
+}
+
+variable "db_username" {
+  type = string
+  default = "admin"
+}
+
+variable "db_password" {
+  type = string
+  default = "tesT1234"
+}
+
+#------------- LB Variable ---------------------------------
+variable "health_path" {
+  description = "target group health check path"
+  type = string
+  default = "/index.html"
+}
+
+variable "lb_type" {
+  description = "loadbalancer's type -> network/application"
+  type = string
+  default = "application"
 }

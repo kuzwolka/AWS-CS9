@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "example" {
-  count = var.s3
+  count = var.bucket_count
   bucket = "s3-${var.user_name}-${count.index}"
 
   tags = {

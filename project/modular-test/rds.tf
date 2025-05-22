@@ -6,15 +6,15 @@ resource "aws_db_subnet_group" "db-subnet-group" {
 resource "aws_db_instance" "db-instance" {
   count = var.db_count
   db_name = "defaultdb${count.index}"
-  identifier = "${var.db_identifier}-instance-${count.index}"
+  identifier = "${var.db_identifier}${count.index}"
   allocated_storage = var.rds-allocated_storage
   instance_class = var.rds["instnace_class"]
   port = var.rds-ports["${var.rds["engine_name"]}"]
   engine = var.rds["engine_name"]
   engine_version = var.rds["engine_version"]
 
-  username = var.rds["username"]
-  password = var.rds["password"]
+  username = var.db_username
+  password = var.db_password
   skip_final_snapshot = true
 
   db_subnet_group_name = aws_db_subnet_group.db-subnet-group.name

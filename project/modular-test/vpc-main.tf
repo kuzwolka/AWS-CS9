@@ -1,5 +1,5 @@
 locals {
-  vpc_name         = var.id
+  vpc_name         = var.user_name
   cidr             = var.vpc_cidr
   az               = split(",", var.availability_zones[var.region])
   count            = length(local.az)

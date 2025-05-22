@@ -10,12 +10,12 @@ variable "vpc_name" {
   type = string
   default = "test-vpc"
 }
-variable "id" {
+variable "user_name" {
   type = string
   default = "default-user"
 }
 
-variable "user_git" {
+variable "project_link" {
   description = "유저의 github repo 링크"
   type = string
   default = "https://github.com/kuzwolka/awswebtest.git"
@@ -26,6 +26,21 @@ variable "ec2type" {
   default = "t3.micro"
 }
 
+variable "access_key" {
+  description = "aws access key"
+  type = string
+  default = "-"
+}
+variable "secret_key" {
+  description = "aws secret key"
+  type = string
+  default = "-"
+}
+variable "session_token" {
+  description = "aws session token"
+  type = string
+  default = "-"
+}
 
 variable "s3" {
   type = number

@@ -1,6 +1,6 @@
 locals {
   ami_instance_type = var.ec2type
-  git_repo_link = var.user_git
+  git_repo_link = var.project_link
 }
 
 data "aws_ami" "amzn2" {
@@ -67,7 +67,10 @@ resource "null_resource" "stop_instance" {
 
   provisioner "local-exec" {
     command = <<EOT
-      aws ec2 stop-instances --instance-ids ${aws_instance.instance_for_ami.id} --region ${var.region}
+      AWS_ACCESS_KEY_ID="${var.access_key}" \
+      AWS_SECRET_ACCESS_KEY="${var.secret_key}" \
+      AWS_SESSION_TOKEN="${var.session_token}" \ 
+      aws ec2 stop-instances --instance-ids ${aws_instance.instance_for_ami.id} --region ${var.region} --
     EOT
   }
 }

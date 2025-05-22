@@ -15,19 +15,19 @@ resource "aws_instance" "web2" {
   key_name               = aws_key_pair.deployer.key_name
 
   tags = {
-    Name = "var.id-${count.index}"
+    Name = "${var.user_name}-${count.index}"
   }
 
   depends_on = [aws_ami_from_instance.ami]
 }
 
 resource "aws_key_pair" "deployer" {
-  key_name   = "${var.id}-key"
+  key_name   = "${var.user_name}-key"
   public_key = file("//root/AWS-CS9/project/4aws-ami-test/keys/hello.pem.pub")
 }
 
 resource "aws_security_group" "instance-sg" {
-  name        = "${var.id}-web-sg"
+  name        = "${var.user_name}-web-sg"
   description = "security group for instance"
   vpc_id      = aws_vpc.test.id
 
@@ -68,6 +68,6 @@ resource "aws_security_group" "instance-sg" {
   }
 
   tags = {
-    Name = "${var.id}-web-sg"
+    Name = "${var.user_name}-web-sg"
   }
 }

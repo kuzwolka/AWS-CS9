@@ -23,7 +23,7 @@ resource "aws_db_instance" "db-instance" {
 
 
 resource "aws_security_group" "db-sg" {
-  name        = "${var.id}-db-sg"
+  name        = "${var.user_name}-db-sg"
   description = "security group for rds instnace"
   vpc_id      = aws_vpc.test.id
 
@@ -43,6 +43,6 @@ resource "aws_security_group" "db-sg" {
   }
 
   tags = {
-    Name = "${var.id}-db-sg"
+    Name = "${var.user_name}-db-sg"
   }
 }

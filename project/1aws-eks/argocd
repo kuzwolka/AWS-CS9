@@ -1,0 +1,34 @@
+resource "kubernetes_namespace" "argocd" {
+  metadata {
+    name = "argocd"
+    labels = {
+      name = "argocd"
+    }
+  }
+}
+
+resource "helm_release" "argocd" {
+  name       = "argo-cd" # Release name
+  repository = "https://argoproj.github.io/argo-helm"
+  chart      = "argo-cd" # Chart name
+  version    = var.argocd_chart_version
+  namespace  = kubernetes_namespace.argocd.metadata[0].name
+
+  # ArgoCD also installs CRDs.
+  timeout       = 600 # 10 minutes
+  wait          = true
+  wait_for_jobs = true
+
+  # Default values are often sufficient for a basic setup.
+  # Customize as needed, e.g., to expose the ArgoCD server UI via a LoadBalancer.
+  # values = [
+  #   yamlencode({
+  #     server = {
+  #       service = {
+  #         type = "LoadBalancer"
+  #       }
+  #     }
+  #   })
+  # ]
+  depends_on = [kubernetes_namespace.argocd]
+}

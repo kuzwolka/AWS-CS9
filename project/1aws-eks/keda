@@ -1,0 +1,30 @@
+resource "kubernetes_namespace" "keda" {
+  metadata {
+    name = "keda"
+    labels = {
+      name = "keda"
+    }
+  }
+}
+
+resource "helm_release" "keda" {
+  name       = "keda"
+  repository = "https://kedacore.github.io/charts"
+  chart      = "keda"
+  version    = var.keda_chart_version
+  namespace  = kubernetes_namespace.keda.metadata[0].name
+
+  # KEDA installs CRDs. Increase timeout to ensure CRDs are ready.
+  timeout       = 600 # 10 minutes
+  wait          = true
+  wait_for_jobs = true
+
+  # Values can be customized as needed. Refer to the KEDA Helm chart documentation.
+  # values = [
+  #   yamlencode({
+  #     # Add KEDA specific values here if defaults are not sufficient
+  #   })
+  # ]
+
+  depends_on = [kubernetes_namespace.keda]
+}

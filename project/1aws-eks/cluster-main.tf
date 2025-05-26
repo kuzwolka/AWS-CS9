@@ -46,3 +46,12 @@ resource "aws_iam_role_policy_attachment" "example-AmazonEKSVPCResourceControlle
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
   role       = aws_iam_role.example.name
 }
+
+#----------- set eks endpoint for local kubectl config -------
+resource "null_resource" "update_kubeconfig" {
+  provisioner "local-exec" {
+    command = "aws eks update-kubeconfig --region ${var.region} --name ${aws_eks_cluster.example.name} --alias ${aws_eks_cluster.example.name}"
+  }
+  
+  depends_on = [ aws_eks_cluster.example ]
+}

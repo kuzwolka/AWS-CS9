@@ -3,7 +3,7 @@ resource "aws_eks_node_group" "example" {
   node_group_name = "example"
   node_role_arn   = aws_iam_role.eks-worker.arn
   subnet_ids      = aws_subnet.private_subnets[*].id
-  instance_types = [ "t3.micro" ]
+  instance_types = [ var.ng_instance_type ]
   ami_type = "AL2_x86_64"
   version = aws_eks_cluster.example.version
 

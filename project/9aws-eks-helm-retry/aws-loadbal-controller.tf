@@ -1,4 +1,4 @@
-#---------------IAM------
+#---------------IAM Module------
 module "aws_load_balancer_controller_irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "5.3.1" # Use a compatible version, check module releases for latest
@@ -15,6 +15,25 @@ module "aws_load_balancer_controller_irsa_role" {
   }
 }
 
+data "aws_iam_policy_document" "ec2describe" {
+  statement {
+    effect    = "Allow"
+    actions   = ["ec2:Describe*", "elasticloadbalancing:*"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "policy" {
+  name        = "ec2-policies"
+  description = "not in the alb controller module"
+  policy      = data.aws_iam_policy_document.ec2describe.json
+}
+
+resource "aws_iam_role_policy_attachment" "ec2attach" {
+  role = module.aws_load_balancer_controller_irsa_role.iam_role_name
+  policy_arn = aws_iam_policy.policy.arn
+}
+
 resource "kubernetes_service_account" "aws_load_balancer_controller" {
   metadata {
     name      = "aws-load-balancer-controller"
@@ -23,16 +42,6 @@ resource "kubernetes_service_account" "aws_load_balancer_controller" {
       "eks.amazonaws.com/role-arn" = module.aws_load_balancer_controller_irsa_role.iam_role_arn
     }
   }
-}
-
-resource "aws_iam_openid_connect_provider" "example" {
-  url             = data.aws_eks_cluster.example.identity[0].oidc[0].issuer
-  client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = ["9e99a48a9960b14926bb7f3b02e22da0afd10df6"]
-}
-
-output "oidc_url" {
-  value = data.aws_eks_cluster.example.identity[0].oidc[0].issuer
 }
 
 #---------------Helm_release------

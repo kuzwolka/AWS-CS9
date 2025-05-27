@@ -20,20 +20,6 @@ provider "aws" {
   region = var.region
 }
 
-# Data sources to configure Kubernetes and Helm providers
-# These will fetch the EKS cluster details after it's created.
-data "aws_eks_cluster" "example" {
-  name = aws_eks_cluster.example.name
-  # Ensure the cluster resource is created before this data source is read
-  depends_on = [aws_eks_cluster.example]
-}
-
-data "aws_eks_cluster_auth" "example_auth" {
-  name = aws_eks_cluster.example.name
-  # Ensure the cluster resource is created before this data source is read
-  depends_on = [aws_eks_cluster.example]
-}
-
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.example.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.example.certificate_authority[0].data)

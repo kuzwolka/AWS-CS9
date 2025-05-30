@@ -1,0 +1,55 @@
+#cloud-config
+
+
+write_files:
+  - path: /usr/local/bin/setup-nginx.sh
+    permissions: '0755'
+    owner: root:root
+    content: |
+      #!/bin/bash
+      echo "[INFO] nginx 설치" >> /var/log/nginx-setup.log
+
+
+      # Wait for internet
+      while true; do
+        ping -c 1 www.google.com &>/dev/null && break
+        echo "[WARN] Network 연결문제 발생" >> /var/log/nginx-setup.log
+        sleep 5
+      done
+
+
+      # Install nginx
+      echo "[INFO] nginx 설치" >> /var/log/nginx-setup.log
+      apt update >> /var/log/nginx-setup.log 2>&1
+      apt install -y nginx >> /var/log/nginx-setup.log 2>&1
+      echo "hello" >> /var/www/html/index.html
+      systemctl enable nginx
+      systemctl start nginx
+      echo "[INFO] nginx 설치 완료" >> /var/log/nginx-setup.log
+
+
+  - path: /etc/systemd/system/nginx-setup.service
+    permissions: '0644'
+    owner: root:root
+    content: |
+      [Unit]
+      Description=Custom NGINX Setup
+      After=network-online.target
+      Wants=network-online.target
+
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/local/bin/setup-nginx.sh
+      RemainAfterExit=true
+
+
+      [Install]
+      WantedBy=multi-user.target
+
+
+runcmd:
+  - sudo systemctl daemon-reexec  # 현재 실행 중인 systemd 프로세스를 자기 자신을 다시 실행(re-execute) 하게 만듭니다. (systemd 자체가 업데이트 되었을 때)
+  - sudo systemctl daemon-reload  # systemd에게 서비스 유닛 파일(systemd unit file)이 변경되었음을 알리고, 그것을 다시 로드하게 합니다. (신규 생성시나 수정시)
+  - sudo systemctl enable nginx-setup.service
+  - sudo systemctl start nginx-setup.service

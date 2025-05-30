@@ -46,4 +46,6 @@ resource "openstack_compute_instance_v2" "web" {
     fixed_ip_v4 = "172.16.102.${count.index + 10}"
   }
 
+  user_data = file("${path.module}/user_data/user_service.yml")
+
 }

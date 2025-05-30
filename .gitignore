@@ -3,3 +3,4 @@
 **/terraform.tfstate
 **/terraform.tfstate.backup
 project/8aws-eks-helmfail/kubectl
+**/jammy-server-cloudimg-amd64.img

@@ -1,0 +1,4 @@
+2025-06-16 12:26:36 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2025-06-17 11:56:02 4 [Warning] Access denied for user 'root'@'localhost' (using password: YES)
+2025-06-17 11:55:56 0 [Note] /usr/sbin/mariadbd: ready for connections.
+2025-06-17 11:56:02 4 [Warning] Access denied for user 'root'@'localhost' (using password: YES)

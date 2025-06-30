@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse, RedirectResponse
 import todo
 
+
 app = FastAPI()
 
 @app.get('/')

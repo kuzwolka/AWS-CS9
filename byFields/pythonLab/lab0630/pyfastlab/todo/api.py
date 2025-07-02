@@ -13,6 +13,7 @@ async def welcome() -> dict:
     }
 
 app.include_router(todo.todo_router)
+app.include_router(todo.person_router)
 
 # @app.get('/test1')
 # async def test1() -> str:

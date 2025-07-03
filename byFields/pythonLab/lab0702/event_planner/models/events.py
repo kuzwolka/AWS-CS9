@@ -1,8 +1,8 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 class Event(BaseModel):
-    id: int
+    id: Optional[int] = None
     title: str
     image: str
     description: str

@@ -24,6 +24,7 @@ async def retrive_event(id: int) -> Event:
 
 @event_router.post("/new")
 async def create_event(body: Event = Body(...)) -> dict:
+    body.id = len(events) + 1
     events.append(body)
     return {
         "message": "New event is created"
